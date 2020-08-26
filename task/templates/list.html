@@ -1,7 +1,17 @@
-<h3>Lists</h3>
 
+<form method="POST" action="/">
+    {% csrf_token %}
+    {{form.title}}
+    <input type="submit" name="Create task">
+</form>
 {% for task in tasks %}
     <di>
-        <p>{{task}}</p>
+        <a href="{% url 'update' task.id %}">Update</a>
+        <a href="{% url 'delete' task.id %}">Delete</a>
+        {% if task.complete == True %}
+        <strike>{{task}}</strike>
+        {% else %}
+        <span>{{task}}</span>
+        {% endif %}
     </di>
 {% endfor %}
